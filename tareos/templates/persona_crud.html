@@ -1,0 +1,92 @@
+<!-- paginadesempenos.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Añadir Persona</h2>
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar</button>
+    </form>
+
+    <h2>Lista de Personas</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for persona in personas %}
+                <tr>
+                    <td>{{ persona.persona_id }}</td>
+                    <td>{{ persona.nombre }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% if persona %}
+        <h2>Añadir Desempeño para {{ persona.nombre }}</h2>
+        <form method="post" action="">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Guardar Desempeño</button>
+        </form>
+
+        <h2>Lista de Desempeños para {{ persona.nombre }}</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Descripción de Tarea</th>
+                    <th>Puntuación</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for desempeno in desempenos %}
+                    <tr>
+                        <td>{{ desempeno.registro_id }}</td>
+                        <td>{{ desempeno.tarea_descripcion }}</td>
+                        <td>{{ desempeno.puntuacion }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2>Añadir Desempeño Diario</h2>
+        <form method="post" action="">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Guardar</button>
+        </form>
+
+        <h2>Lista de Desempeños Diarios</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Persona ID</th>
+                    <th>Descripción de Tarea</th>
+                    <th>Puntuación</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for desempeno in desempenos %}
+                    <tr>
+                        <td>{{ desempeno.registro_id }}</td>
+                        <td>{{ desempeno.persona_id }}</td>
+                        <td>{{ desempeno.tarea_descripcion }}</td>
+                        <td>{{ desempeno.puntuacion }}</td>
+                        <td>{{ desempeno.fecha }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <a href="{% url 'desempeno_crud' %}">Ver Todos los Desempeños</a>
+        
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,54 @@
+<!-- base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://bootswatch.com/5/sketchy/bootstrap.min.css">
+    <title>Mi Sitio Web</title>
+    <style>
+        body {
+            min-height: 100vh;
+        }
+
+        footer {
+            text-align: center;
+            padding-left: 45%;
+            margin-top: auto; /* Empuja el pie de página hacia la parte inferior */
+        }
+        .puntuacion-alta {
+    background-color: #7FFF7F; /* Verde claro */
+  }
+
+  .puntuacion-baja {
+    background-color: #FF7F7F; /* Rojo claro */
+  }
+    </style>
+</head>
+<body class="d-flex flex-column">
+    <div class="content-wrapper">
+        <!-- Contenido de la página -->
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer class="bg-light">
+        <ul class="pagination pagination-lg">
+            <li class="page-item disabled">
+                <a class="page-link" href="#">&laquo;</a>
+            </li>
+            <li class="page-item active">
+                <a class="page-link" href="{% url 'persona_crud' %}">1</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="{% url 'persona_desempeno_crud' %}">2</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="{% url 'desempeno_crud' %}">3</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">&raquo;</a>
+            </li>
+        </ul>
+    </footer>
+</body>
+</html>

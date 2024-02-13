@@ -1,0 +1,31 @@
+<!-- pagina3.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+    <div style="text-align: center; margin-top: 20px;">
+        <h2>Lista de Personas y Sus Tareas - Página 3</h2>
+        <form method="post" action="">
+            {% csrf_token %}
+            {% for persona in personas %}
+                <div class="card text-white bg-success mb-3" style="max-width: 20rem; margin-bottom: 20px;">
+                    <div class="card-header">
+                        {{ persona.nombre }}
+                    </div>
+                    <div class="card-body">
+                        {% for desempeno in persona.desempenodiario_set.all %}
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ desempeno.tarea_descripcion }}</h5>
+                                    <label for="puntuacion_{{ desempeno.registro_id }}">Puntuación:</label>
+                                    <input type="number" name="puntuacion_{{ desempeno.registro_id }}" value="{{ desempeno.puntuacion }}" min="1" max="10">
+                                    <input type="hidden" name="editar_puntuacion" value="{{ desempeno.registro_id }}">
+                                    <button type="submit" class="btn btn-primary">Guardar Puntuación</button>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </form>
+    </div>
+{% endblock %}
